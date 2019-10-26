@@ -9,6 +9,7 @@ import com.example.bookstore.model.Movie;
 
 import java.util.List;
 
+import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
@@ -27,6 +28,7 @@ public class MainPresenter extends BasePresenterImpl<MainContract.View> implemen
     public void fetchMovies(int pageNum) {
         //TODO Repo에서 data 가져온다
         //TODO RxJava로 View로 업스트림을 올린다.
+
         this.repository.fetchMovies(pageNum)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
