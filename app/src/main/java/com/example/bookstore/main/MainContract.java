@@ -17,6 +17,5 @@ public class MainContract {
             extends BasePresenter<View> {
         //book list req
         void fetchMovies(int pageNum);
-        void fetchMoviesDone(List<Movie> movies);
     }
 }

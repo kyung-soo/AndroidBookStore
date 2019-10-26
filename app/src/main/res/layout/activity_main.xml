@@ -20,12 +20,11 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <Button
-        android:id="@+id/btnFetchItems"
-        style="@style/Widget.AppCompat.Button"
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Click" />
+        android:id="@+id/recyclerView"
+        />
 
 
     <!--    <include layout="@layout/content_main" />-->

@@ -47,7 +47,8 @@ public class ResponseMovie {
         @SerializedName(value = "movie_count")
         int movieCount;
         int limit;
-        int page_number;
+        @SerializedName(value = "page_number")
+        int pageNumber;
         List<Movie> movies;
 
         public int getMovieCount() {
@@ -66,12 +67,12 @@ public class ResponseMovie {
             this.limit = limit;
         }
 
-        public int getPage_number() {
-            return page_number;
+        public int getPageNumber() {
+            return pageNumber;
         }
 
-        public void setPage_number(int page_number) {
-            this.page_number = page_number;
+        public void setPageNumber(int pageNumber) {
+            this.pageNumber = pageNumber;
         }
 
         public List<Movie> getMovies() {
@@ -87,7 +88,7 @@ public class ResponseMovie {
             return "ResponseData{" +
                     "movieCount=" + movieCount +
                     ", limit=" + limit +
-                    ", page_number=" + page_number +
+                    ", page_number=" + pageNumber +
                     ", movies=" + movies +
                     '}';
         }
