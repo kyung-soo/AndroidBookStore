@@ -8,6 +8,16 @@ public class Movie {
     String summary;
     @SerializedName(value = "small_cover_image")
     String smallCoverImage;
+    @SerializedName(value = "medium_cover_image")
+    String mediumCoverImage;
+
+    public String getMediumCoverImage() {
+        return mediumCoverImage;
+    }
+
+    public void setMediumCoverImage(String mediumCoverImage) {
+        this.mediumCoverImage = mediumCoverImage;
+    }
 
     public long getId() {
         return id;

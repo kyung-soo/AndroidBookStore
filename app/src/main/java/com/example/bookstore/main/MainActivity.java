@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 import com.example.bookstore.R;
 import com.example.bookstore.base.BaseActivity;
@@ -28,6 +29,13 @@ public class MainActivity extends BaseActivity<MainContract.View, MainContract.P
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
+    @BindView(R.id.progress)
+    ProgressBar progress;
+
+
+    int startPageNumber = 1;
+
+
     @Override
     protected MainContract.Presenter setPresenter() {
         return new MainPresenter();
@@ -38,7 +46,7 @@ public class MainActivity extends BaseActivity<MainContract.View, MainContract.P
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mPresenter.fetchMovies(1);
+        mPresenter.fetchMovies(startPageNumber);
 
         initRecyclerView();
 //        btnFetchItems.setOnClickListener(new View.OnClickListener() {
@@ -53,15 +61,25 @@ public class MainActivity extends BaseActivity<MainContract.View, MainContract.P
 
     private void initRecyclerView() {
         adapter = new MainAdapter(movies, mPresenter);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(adapter);
     }
 
     @Override
     public void fetchMoviesDone(List<Movie> movies) {
+        if (startPageNumber == 1)
+        {
+            progress.setVisibility(View.GONE);
+        }
+
         Log.d(_TAG, " fetchMoviesDone count : " + movies.size());
         this.movies.addAll(movies);
         adapter.notifyDataSetChanged();
+
+        if (startPageNumber <= 3)
+        {
+            mPresenter.fetchMovies(startPageNumber++);
+        }
     }
 }

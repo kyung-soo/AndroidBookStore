@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.bookstore.R;
 import com.example.bookstore.model.Movie;
 
@@ -38,11 +39,12 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainAdapterVie
         public MainAdapterViewHolder(@NonNull View itemView) {
             super(itemView);
             this.thumbnail = itemView.findViewById(R.id.thumbnail);
-//            this.title = itemView.findViewById();
-//            this.summary = itemView.findViewById();
+            this.title = itemView.findViewById(R.id.title);
+            this.summary = itemView.findViewById(R.id.summary);
         }
     }
 
+    // 2. onCreateViewHolder
     @NonNull
     @Override
     public MainAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -51,26 +53,24 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainAdapterVie
 
         return new MainAdapterViewHolder(view);
     }
-    
+
+    // 3. onBindViewHolder
     @Override
     public void onBindViewHolder(@NonNull MainAdapterViewHolder holder, int position) {
         Movie movie = movies.get(position);
-        String thumbnailPath = movie.getSmallCoverImage();
+//        String thumbnailPath = movie.getSmallCoverImage();
+        String thumbnailPath = movie.getMediumCoverImage();
         Log.d("thumbnailPath ==> ", thumbnailPath);
+        Glide.with(holder.itemView.getContext()).load(thumbnailPath).into(holder.thumbnail);
+        holder.title.setText(movie.getTitle());
+        holder.summary.setText(movie.getSummary());
 //        holder.thumbnail.setImageURI(thumbnailPath);
 
     }
 
+    // 4. getItemCount
     @Override
     public int getItemCount() {
         return movies.size();
     }
-
-
-
-
-    // 2. onCreateViewHolder
-    // 3. onBindViewHolder
-    // 4. getItemCount
-
 }
